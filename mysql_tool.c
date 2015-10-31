@@ -88,7 +88,6 @@ int create_tables(MYSQL *mysql)
 		ID char(10),\
 		name varchar(20),\
 		password varchar(20),\
-		age tinyint,\
 		gender enum('M','F'),\
 		title varchar(20),\
 		research_area varchar(50),\
@@ -102,10 +101,3 @@ int create_tables(MYSQL *mysql)
 
 }
 
-void main()
-{
-	MYSQL mysql;
-	connect_to_mysql(&mysql,"lab_database");
-	create_tables(&mysql);
-	mysql_close(&mysql);
-}
