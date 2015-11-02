@@ -7,21 +7,26 @@
  * Description   : 
  * ********************************************************************/
 
+#include <stdlib.h>
 
 typedef struct Student{
-	char * ID,
-	char * name,
-	char * password,
-	int age,
-	char gender,
-	int grade,
-	char inlab} STU;
+	char * ID;
+	char * name;
+	char * password;
+	int age;
+	char gender;
+	char * grade;
+	char inlab;
+} STU;
 
-type struct Teacher{
-	char * ID,
-	char * name,
-	char * password,
-	char gender,
-	char * title,
-	char * research_area,
-	char inlab} TCH;
+
+typedef struct Teacher{
+	char * ID;
+	char * name;
+	char * password;
+	char gender;
+	char * title;
+	char * research_area;
+	char inlab;
+} TCH;
+
