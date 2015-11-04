@@ -41,6 +41,8 @@ TCH * tch_malloc()
 int main()
 {
 	int option;
+	STU * stu	= stu_malloc();
+	TCH * tch = tch_malloc();
 	MYSQL mysql;
 	connect_to_mysql(&mysql,"lab_database");
 	create_tables(&mysql);
@@ -49,24 +51,30 @@ int main()
 	switch( option )
 	{
 		case 1:					//student register
-			{
-				STU * stu	= stu_malloc();
-				stuinfo_check(stu);
-				stu_register(&mysql,stu);
-				show_stuinfo(stu);
-			}
+			stuinfo_check(stu);
+			stu_register(&mysql,stu);
+			show_stuinfo(stu);
 			break;
 		case 2:					//teacher register
-			{
-				TCH * tch = tch_malloc();
-				tchinfo_check(tch);
-				tch_register(&mysql,tch);
-				show_tchinfo(tch);
-			}
+			tchinfo_check(tch);
+			tch_register(&mysql,tch);
+			show_tchinfo(tch);
 			break;
 		case 3:					//student login
+			show_classtable(&mysql);
+			input_class(&mysql,"2015110214");
+			if ( !stu_login(&mysql) )
+			{
+				puts("login successful!");
+				search_stuinfo(&mysql);
+			}
 			break;
 		case 4:					//teacher login
+			if ( !tch_login(&mysql) )
+			{
+				puts("login successful!");
+				search_tchinfo(&mysql);
+			}
 			break;
 		case 5:					//exit
 		default:

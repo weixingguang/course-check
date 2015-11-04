@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ID	course_check.h	/^	char * ID;$/;"	m	struct:Student
+ID	course_check.h	/^	char * ID;$/;"	m	struct:Teacher
+OBJECT	makefile	/^OBJECT = course_check.o input_info.o register.o mysql_tool.o show_info.o login.o$/;"	m
+STU	course_check.h	/^} STU;$/;"	t	typeref:struct:Student
+Student	course_check.h	/^typedef struct Student{$/;"	s
+TCH	course_check.h	/^} TCH;$/;"	t	typeref:struct:Teacher
+Teacher	course_check.h	/^typedef struct Teacher{$/;"	s
+age	course_check.h	/^	int age;$/;"	m	struct:Student
+connect_to_mysql	mysql_tool.c	/^int connect_to_mysql(MYSQL *mysql,char * database_name)$/;"	f
+create_tables	mysql_tool.c	/^int create_tables(MYSQL *mysql)$/;"	f
+gender	course_check.h	/^	char gender;$/;"	m	struct:Student
+gender	course_check.h	/^	char gender;$/;"	m	struct:Teacher
+grade	course_check.h	/^	char * grade;$/;"	m	struct:Student
+inlab	course_check.h	/^	char inlab;$/;"	m	struct:Student
+inlab	course_check.h	/^	char inlab;$/;"	m	struct:Teacher
+input_class	register.c	/^void input_class(MYSQL * mysql,char * ID)$/;"	f
+main	course_check.c	/^int main()$/;"	f
+name	course_check.h	/^	char * name;$/;"	m	struct:Student
+name	course_check.h	/^	char * name;$/;"	m	struct:Teacher
+password	course_check.h	/^	char * password;$/;"	m	struct:Student
+password	course_check.h	/^	char * password;$/;"	m	struct:Teacher
+research_area	course_check.h	/^	char * research_area;$/;"	m	struct:Teacher
+search_stuinfo	show_info.c	/^void search_stuinfo(MYSQL * mysql)$/;"	f
+search_tchinfo	show_info.c	/^TCH * search_tchinfo(MYSQL * mysql)$/;"	f
+show_stuinfo	show_info.c	/^void show_stuinfo(STU * stu)$/;"	f
+show_tchinfo	show_info.c	/^void show_tchinfo(TCH * tch)$/;"	f
+stu_login	login.c	/^char * stu_login(MYSQL * mysql)$/;"	f
+stu_malloc	course_check.c	/^STU * stu_malloc()$/;"	f
+stu_register	register.c	/^int stu_register(MYSQL * mysql,STU * stu)$/;"	f
+stuinfo_check	input_info.c	/^void stuinfo_check(STU * stu)$/;"	f
+tch_login	login.c	/^char * tch_login(MYSQL * mysql)$/;"	f
+tch_malloc	course_check.c	/^TCH * tch_malloc()$/;"	f
+tch_register	register.c	/^int tch_register(MYSQL * mysql,TCH * tch)$/;"	f
+tchinfo_check	input_info.c	/^void tchinfo_check(TCH * tch)$/;"	f
+title	course_check.h	/^	char * title;$/;"	m	struct:Teacher
+welcome_info	register.c	/^void welcome_info()$/;"	f

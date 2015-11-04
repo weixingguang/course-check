@@ -1,8 +1,11 @@
-OBJECT = course_check.o input_info.o register.o mysql_tool.o show_info.o
+OBJECT = course_check.o input_info.o register.o mysql_tool.o show_info.o login.o
 
 
 course_check: $(OBJECT)
 	gcc $(OBJECT) -o course_check `mysql_config --cflags --libs` -g
+
+login.o:login.c mysql_tool.h
+	gcc -c login.c -o login.o -g
 
 show_info.o:show_info.c course_check.h
 	gcc -c show_info.c -o show_info.o -g
