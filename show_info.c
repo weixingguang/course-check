@@ -78,10 +78,10 @@ void show_classtable(MYSQL * mysql)
 	MYSQL_RES * res;
 	MYSQL_ROW row;
 	int index=0;
-	char *week[5]={"monday","tuesday","wednesday","thursday","friday"};
+	char *week[5]={"Monday","Tuesday","Wednesday","Thursday","Friday"};
 	for(index=0;index<5;index++)
 	{
-		sprintf(myorder,"select class1,class2,class3 class4,class5,class6,class7,class8,class9,class10,class11 from student_class where ID='%s' and week='%s'",ID,week[index]);
+		sprintf(myorder,"select class1,class2,class3,class4,class5,class6,class7,class8,class9,class10,class11 from student_class where ID='%s' && week='%s'",ID,week[index]);
 		mysql_query(mysql,myorder);
 		res = mysql_store_result(mysql);
 		row = mysql_fetch_row(res);

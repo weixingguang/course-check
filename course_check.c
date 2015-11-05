@@ -61,13 +61,16 @@ int main()
 			show_tchinfo(tch);
 			break;
 		case 3:					//student login
-			show_classtable(&mysql);
-			input_class(&mysql,"2015110214");
-			if ( !stu_login(&mysql) )
-			{
-				puts("login successful!");
-				search_stuinfo(&mysql);
-			}
+			stu_signout(&mysql);
+			//if ( !stu_login(&mysql) )
+			//{
+			//	puts("login successful!");
+			//	search_stuinfo(&mysql);
+			//	show_classtable(&mysql);
+			//	input_class(&mysql,"2015110214");
+			//	tch_signin(&mysql);
+			//	tch_signout(&mysql);
+			//}
 			break;
 		case 4:					//teacher login
 			if ( !tch_login(&mysql) )

@@ -47,7 +47,7 @@ int create_tables(MYSQL *mysql)
 	nstate = mysql_query(mysql,
 		"create table if not exists student_class(\
 		ID char(10),\
-		week enum('monday','tuesday','wednesday','thursday','friday'),\
+		week enum('Monday','Tuesday','Wednesday','Thursday','Friday'),\
 		class1 varchar(30),\
 		class2 varchar(30),\
 		class3 varchar(30),\
@@ -69,7 +69,7 @@ int create_tables(MYSQL *mysql)
 		"create table if not exists student_timetable(\
 		ID char(10),\
 		date date,\
-		week enum('monday','tuesday','wednesday','thursday','friday','saturday','sunday'),\
+		week enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'),\
 		m_in time,\
 	  m_out time,\
 	  a_in time,\
