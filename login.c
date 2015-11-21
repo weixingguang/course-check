@@ -7,11 +7,9 @@
  * Description   : 
  * ********************************************************************/
 
-#include "mysql_tool.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "course_check.h"
 
-int stu_login(MYSQL * mysql)
+int user_login(MYSQL * mysql,USER * user)
 {
 	char c;
 	char * ID = malloc( 10 * sizeof(char) );
@@ -24,47 +22,21 @@ int stu_login(MYSQL * mysql)
 	printf("please input your password: ");
 	scanf("%s",password);
 
-	sprintf(myorder,"select password,gender from student_info where ID=%s",ID);
+	if( user->ue_flag == 1 )
+		sprintf(myorder,"select password from teacher_info where ID=%s",ID);
+	else
+		sprintf(myorder,"select password from student_info where ID=%s",ID);
+
 	mysql_query(mysql,myorder);
 	MYSQL_RES * res = mysql_store_result(mysql);
 	MYSQL_ROW row = mysql_fetch_row(res);
 
-	//TODO free(password)
-	if ( strcmp(password,row[0]) == 0 )
-	{
-		mysql_free_result(res);
-		free(password);
-		return 0;
-	}
-	else
-	{
-		mysql_free_result(res);
-		free(password);
-		return 1;
-	}
+	int res_value = (strcmp(password,row[0]) == 0) ? 0 : 1;
+	mysql_free_result(res);
+	free(password);
+	free(myorder);
+	free(ID);
+
+	return res_value;
 }
 
-int tch_login(MYSQL * mysql)
-{
-	char c;
-	char * ID = malloc( 10 * sizeof(char) );
-	char * password = malloc( 20 * sizeof(char) );
-  char * myorder = malloc(100 * sizeof(char) );
-
-	printf("please input your ID: ");
-	scanf("%s",ID);
-	while( ( c=getchar() )!='\n' && c !=EOF );
-	printf("please input your password: ");
-	scanf("%s",password);
-
-	sprintf(myorder,"select password ,name from teacher_info where ID=%s",ID);
-	mysql_query(mysql,myorder);
-	MYSQL_RES * res = mysql_store_result(mysql);
-	MYSQL_ROW row = mysql_fetch_row(res);
-	
-	//TODO free(password)
-	if ( strcmp(password,row[0]) == 0 )
-		return 0;
-	else
-		return 1;
-}

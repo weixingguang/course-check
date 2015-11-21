@@ -7,7 +7,16 @@
  * Description   : 
  * ********************************************************************/
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <mysql/mysql.h>
+
+#define IS_TCH 1
+#define IS_STU 0
+
+#define SIGN_IN 1
+#define SIGN_OUT 0
 
 typedef struct Student{
 	char * ID;
@@ -30,3 +39,13 @@ typedef struct Teacher{
 	char inlab;
 } TCH;
 
+typedef union Ue
+{
+	STU * stu;
+	TCH * tch;
+} UE;
+
+typedef struct User{
+	UE * ue;
+	int ue_flag;
+} USER;

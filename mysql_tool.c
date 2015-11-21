@@ -7,7 +7,7 @@
  * Description   : This file include some basic tool for the mysql
  * ********************************************************************/
 
-#include "mysql_tool.h"
+#include "course_check.h"
 
 /* connect to mysql database */
 /* successfully returns 0, otherwist returns 1*/
@@ -25,9 +25,10 @@ int connect_to_mysql(MYSQL *mysql,char * database_name)
 }
 
 
-/* check and create the tables*/
+/* check and create the database tables*/
 int create_tables(MYSQL *mysql)
 {
+	// create student_info table
 	int nstate;
 	nstate = mysql_query(mysql,
 		"create table if not exists student_info(\
@@ -44,6 +45,8 @@ int create_tables(MYSQL *mysql)
 		printf("create table student_info error:%s\n",mysql_error(mysql));
 		return 1;
 	}
+
+	// create student_class table
 	nstate = mysql_query(mysql,
 		"create table if not exists student_class(\
 		ID char(10),\
@@ -65,6 +68,8 @@ int create_tables(MYSQL *mysql)
 		printf("create table student_class error:%s\n",mysql_error(mysql));
 		return 1;
 	}
+
+	// create student_timetable table
 	nstate = mysql_query(mysql,
 		"create table if not exists student_timetable(\
 		ID char(10),\
@@ -83,6 +88,7 @@ int create_tables(MYSQL *mysql)
 		return 1;
 	}
 
+	// create teacher_info table
 	nstate = mysql_query(mysql,
 		"create table if not exists teacher_info(\
 		ID char(10),\

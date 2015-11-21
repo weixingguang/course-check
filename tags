@@ -6,12 +6,21 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ID	course_check.h	/^	char * ID;$/;"	m	struct:Student
 ID	course_check.h	/^	char * ID;$/;"	m	struct:Teacher
-OBJECT	makefile	/^OBJECT = course_check.o input_info.o register.o mysql_tool.o show_info.o login.o$/;"	m
+IS_STU	course_check.h	16;"	d
+IS_TCH	course_check.h	15;"	d
+OBJECT	makefile	/^OBJECT = course_check.o input_info.o register.o mysql_tool.o show_info.o login.o sign.o basic_function.o$/;"	m
+SIGN_IN	course_check.h	18;"	d
+SIGN_OUT	course_check.h	19;"	d
 STU	course_check.h	/^} STU;$/;"	t	typeref:struct:Student
 Student	course_check.h	/^typedef struct Student{$/;"	s
 TCH	course_check.h	/^} TCH;$/;"	t	typeref:struct:Teacher
 Teacher	course_check.h	/^typedef struct Teacher{$/;"	s
+UE	course_check.h	/^} UE;$/;"	t	typeref:union:Ue
+USER	course_check.h	/^} USER;$/;"	t	typeref:struct:User
+Ue	course_check.h	/^typedef union Ue$/;"	u
+User	course_check.h	/^typedef struct User{$/;"	s
 age	course_check.h	/^	int age;$/;"	m	struct:Student
+change_password	basic_function.c	/^void change_password(MYSQL * mysql, USER * user)$/;"	f
 connect_to_mysql	mysql_tool.c	/^int connect_to_mysql(MYSQL *mysql,char * database_name)$/;"	f
 create_tables	mysql_tool.c	/^int create_tables(MYSQL *mysql)$/;"	f
 gender	course_check.h	/^	char gender;$/;"	m	struct:Student
@@ -19,24 +28,29 @@ gender	course_check.h	/^	char gender;$/;"	m	struct:Teacher
 grade	course_check.h	/^	char * grade;$/;"	m	struct:Student
 inlab	course_check.h	/^	char inlab;$/;"	m	struct:Student
 inlab	course_check.h	/^	char inlab;$/;"	m	struct:Teacher
-input_class	register.c	/^void input_class(MYSQL * mysql,char * ID)$/;"	f
+input_class	basic_function.c	/^void input_class(MYSQL * mysql,char * ID)$/;"	f
+input_userinfo	input_info.c	/^void input_userinfo(USER * user)$/;"	f
 main	course_check.c	/^int main()$/;"	f
 name	course_check.h	/^	char * name;$/;"	m	struct:Student
 name	course_check.h	/^	char * name;$/;"	m	struct:Teacher
 password	course_check.h	/^	char * password;$/;"	m	struct:Student
 password	course_check.h	/^	char * password;$/;"	m	struct:Teacher
 research_area	course_check.h	/^	char * research_area;$/;"	m	struct:Teacher
-search_stuinfo	show_info.c	/^void search_stuinfo(MYSQL * mysql)$/;"	f
-search_tchinfo	show_info.c	/^TCH * search_tchinfo(MYSQL * mysql)$/;"	f
-show_stuinfo	show_info.c	/^void show_stuinfo(STU * stu)$/;"	f
-show_tchinfo	show_info.c	/^void show_tchinfo(TCH * tch)$/;"	f
-stu_login	login.c	/^char * stu_login(MYSQL * mysql)$/;"	f
+search_stuinfo	basic_function.c	/^void search_stuinfo(MYSQL * mysql)$/;"	f
+search_tchinfo	basic_function.c	/^TCH * search_tchinfo(MYSQL * mysql)$/;"	f
+show_classtable	show_info.c	/^void show_classtable(MYSQL * mysql)$/;"	f
+show_menu	show_info.c	/^void show_menu(USER * user)$/;"	f
+show_user_info	show_info.c	/^void show_user_info(USER * user)$/;"	f
+show_welcome_info	show_info.c	/^void show_welcome_info()$/;"	f
+stu	course_check.h	/^	STU * stu;$/;"	m	union:Ue
 stu_malloc	course_check.c	/^STU * stu_malloc()$/;"	f
-stu_register	register.c	/^int stu_register(MYSQL * mysql,STU * stu)$/;"	f
-stuinfo_check	input_info.c	/^void stuinfo_check(STU * stu)$/;"	f
-tch_login	login.c	/^char * tch_login(MYSQL * mysql)$/;"	f
+stu_sign	sign.c	/^void stu_sign(MYSQL * mysql, int sign_flag)$/;"	f
+tch	course_check.h	/^	TCH * tch;$/;"	m	union:Ue
 tch_malloc	course_check.c	/^TCH * tch_malloc()$/;"	f
-tch_register	register.c	/^int tch_register(MYSQL * mysql,TCH * tch)$/;"	f
-tchinfo_check	input_info.c	/^void tchinfo_check(TCH * tch)$/;"	f
+tch_sign	sign.c	/^void tch_sign(MYSQL * mysql,int sign_flag)$/;"	f
 title	course_check.h	/^	char * title;$/;"	m	struct:Teacher
-welcome_info	register.c	/^void welcome_info()$/;"	f
+ue	course_check.h	/^	UE * ue;$/;"	m	struct:User
+ue_flag	course_check.h	/^	int ue_flag;$/;"	m	struct:User
+user_login	login.c	/^int user_login(MYSQL * mysql,USER * user)$/;"	f
+user_register	register.c	/^int user_register(MYSQL * mysql, USER * user)$/;"	f
+user_sign	sign.c	/^void user_sign(MYSQL * mysql)$/;"	f

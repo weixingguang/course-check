@@ -8,85 +8,49 @@
  * ********************************************************************/
 
 #include "course_check.h"
-#include "mysql_tool.h"
-#include <stdio.h>
 
-void show_stuinfo(STU * stu)
+void show_welcome_info()
 {
-	puts("**********************INFOMATION CARD**************************");
-	printf("   NAME\t: %s\t\t\t\t GENDER\t: %c\n",stu->name,stu->gender);
-	printf("   ID\t: %s\t\t\t GRADE\t: %s\n",stu->ID,stu->grade);
-	printf("   AGE\t: %d\t\t\t\t IN_LAB\t: %c\n",stu->age,stu->inlab);
-	puts("***************************************************************");
+	puts("***************************************************************************");
+	puts("Welcome to course check system!");
+	puts("[option 1 ] A new user, Regist first.");
+	puts("[option 2 ] A registered user, Login please.");
+	puts("[option 3 ] EXIT.");
+	puts("***************************************************************************");
+	printf("please input your optioon: ");
 }
 
-void show_tchinfo(TCH * tch)
+void show_menu(USER * user)
 {
-	puts("**********************INFOMATION CARD**************************");
-	printf("   NAME\t\t: %s\t\t\t TITLE\t: %s\n",tch->name,tch->title);
-	printf("   GENDER\t: %c\t\t\t IN_LAB\t: %c\n",tch->gender,tch->inlab);
-	printf("   RESEARCH AREA: %s",tch->research_area);
-	puts("***************************************************************");
-}
-
-void search_stuinfo(MYSQL * mysql)
-{
-	char * myorder = malloc( 200 * sizeof(char) );
-	char * name = malloc( 20 * sizeof(char) ); 
-	printf("please input the name you want to research: ");
-	scanf("%s",name);
-	sprintf(myorder,"select gender,ID,age,grade,inlab from student_info where name='%s' ",name);
-	mysql_query(mysql,myorder);
-	MYSQL_RES * res = mysql_store_result(mysql);
-	MYSQL_ROW row = mysql_fetch_row(res);
-	puts("**********************INFOMATION CARD**************************");
-	printf("   NAME\t: %s\t\t\t\t GENDER\t: %c\n",name,(char)row[0][0]);
-	printf("   ID\t: %s\t\t\t GRADE\t: %s\n",row[1],row[3]);
-	printf("   AGE\t: %d\t\t\t\t IN_LAB\t: %c\n",atoi(row[2]),row[4][0]);
-	puts("***************************************************************");
-	mysql_free_result(res);
-	free(name);
-	free(myorder);
-}
-
-TCH * search_tchinfo(MYSQL * mysql)
-{
-	char * myorder = malloc( 200 * sizeof(char) );
-	char * name = malloc( 20 * sizeof(char) ); 
-	printf("please input the name you want to search: ");
-	scanf("%s",name);
-	sprintf(myorder,"select title,gender,inlab,research_area from teacher_info where name='%s' ",name);
-	mysql_query(mysql,myorder);
-	MYSQL_RES * res = mysql_store_result(mysql);
-	MYSQL_ROW row = mysql_fetch_row(res);
-	puts("**********************INFOMATION CARD**************************");
-	printf("   NAME\t\t: %s\t\t\t TITLE\t: %s\n",name,row[0]);
-	printf("   GENDER\t: %c\t\t\t IN_LAB\t: %c\n",row[1][0],row[2][0]);
-	printf("   RESEARCH AREA: %s",row[3]);
-	puts("***************************************************************");
-	mysql_free_result(res);
-	free(name);
-	free(myorder);
-}
-
-void show_classtable(MYSQL * mysql)
-{
-	printf("please input the ID you want to search: ");
-	char * myorder = malloc( 200 * sizeof(char) );
-	char * ID = malloc( 10 * sizeof(char) );
-	scanf("%s",ID);
-	MYSQL_RES * res;
-	MYSQL_ROW row;
-	int index=0;
-	char *week[5]={"Monday","Tuesday","Wednesday","Thursday","Friday"};
-	for(index=0;index<5;index++)
+	puts("***************************************************************************");
+	puts("[option 1 ] Change password            [option 2 ] Sign in/out");
+	puts("[option 3 ] Show user info             [option 4 ] Show inlab user");
+	puts("[option 5 ] Show student classtable    [option 6 ] Show sign time table ");
+	puts("[option 7 ] Show sign statistic");
+	if ( user->ue_flag == IS_STU )
 	{
-		sprintf(myorder,"select class1,class2,class3,class4,class5,class6,class7,class8,class9,class10,class11 from student_class where ID='%s' && week='%s'",ID,week[index]);
-		mysql_query(mysql,myorder);
-		res = mysql_store_result(mysql);
-		row = mysql_fetch_row(res);
-		printf("[%-10s]%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s\n",
-				week[index],row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10]);
+	puts("[option 8 ] Input student classtable");
 	}
-	mysql_free_result(res);
+	puts("***************************************************************************");
 }
+
+void show_user_info(USER * user)
+{
+	if ( user->ue_flag == 1 )
+	{
+		puts("**********************INFOMATION CARD**************************");
+		printf("   NAME\t\t: %s\t\t\t TITLE\t: %s\n",user->ue->tch->name,user->ue->tch->title);
+		printf("   GENDER\t: %c\t\t\t IN_LAB\t: %c\n",user->ue->tch->gender,user->ue->tch->inlab);
+		printf("   RESEARCH AREA: %s\n",user->ue->tch->research_area);
+		puts("***************************************************************");
+	}
+	else
+	{
+		puts("**********************INFOMATION CARD**************************");
+		printf("   NAME\t: %s\t\t\t\t GENDER\t: %c\n",user->ue->stu->name,user->ue->stu->gender);
+		printf("   ID\t: %s\t\t\t GRADE\t: %s\n",user->ue->stu->ID,user->ue->stu->grade);
+		printf("   AGE\t: %d\t\t\t\t IN_LAB\t: %c\n",user->ue->stu->age,user->ue->stu->inlab);
+		puts("***************************************************************");
+	}
+}
+
